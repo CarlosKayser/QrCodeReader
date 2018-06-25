@@ -1,23 +1,26 @@
+import { ListPage } from './../pages/list/list';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SQLite } from '@ionic-native/sqlite'
+import { DatabaseProvider } from '../providers/database/database';
+import { MensagemdaoProvider } from '../providers/mensagemdao/mensagemdao';
+import { Vibration } from '@ionic-native/vibration';
 
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ListPage
   ],
   imports: [
     BrowserModule,
@@ -26,15 +29,19 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ListPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    BarcodeScanner,
+    SQLite,
+    DatabaseProvider,
+    MensagemdaoProvider,
+    Vibration
   ]
 })
 export class AppModule {}
